@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Topics</title>
+    <style>
+        /* General Body Styles */
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            background-color: #e6f7ff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Header Styles */
+        h1 {
+            font-size: 3rem;
+            color: #34495e;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        /* Motivational Quote */
+        .quote {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* Form Container Styles */
+        form {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 550px;
+            position: relative;
+            z-index: 2;
+        }
+
+        form p {
+            font-size: 1rem;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        form input:focus, form textarea:focus {
+            outline: none;
+            border-color: #4A90E2;
+            background-color: #fff;
+        }
+
+        /* Button Styles */
+        button {
+            background-color: #3498db;
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Background Image and Overlay */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.w3schools.com/w3images/forestbridge.jpg') no-repeat center center/cover;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        /* Floating Circles Decoration */
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        .circle:nth-child(1) {
+            width: 150px;
+            height: 150px;
+            background-color: #ff7979;
+            top: 10%;
+            left: 15%;
+        }
+
+        .circle:nth-child(2) {
+            width: 100px;
+            height: 100px;
+            background-color: #badc58;
+            top: 30%;
+            left: 70%;
+        }
+
+        .circle:nth-child(3) {
+            width: 200px;
+            height: 200px;
+            background-color: #f6e58d;
+            bottom: 20%;
+            right: 10%;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            form {
+                padding: 20px;
+                max-width: 90%;
+            }
+            button {
+                font-size: 16px;
+                padding: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            .quote {
+                font-size: 1rem;
+            }
+            form {
+                padding: 15px;
+            }
+            button {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Add Topics for Today</h1>
+    <p class="quote">"The journey of a thousand miles begins with a single step."</p>
+
+    <!-- Decorative Floating Circles -->
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Topics</button>
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Today's Revision Topics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Header */
+        h1 {
+            text-align: center;
+            margin: 30px 10px;
+            color: #34495e;
+            font-size: 2.2rem;
+            font-weight: bold;
+        }
+
+        /* Container */
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Grid Layout */
+        .row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            justify-content: center;
+        }
+
+        /* Date Box */
+        .date-box {
+            padding: 20px;
+            border-radius: 10px;
+            background: linear-gradient(145deg, #e0e8e7, #f4fcfb);
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .date-box:hover {
+            transform: translateY(-8px);
+        }
+
+        .date-box h2 {
+            font-size: 1.4rem;
+            color: #27ae60;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        /* Subject Box */
+        .subject-box {
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        .subject-box:hover {
+            background-color: #f9f9f9;
+        }
+
+        .subject-box h3 {
+            font-size: 1.2rem;
+            color: #2980b9;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        /* Topic List */
+        .subject-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .subject-box ul li {
+            padding: 10px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+            text-align: center;
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .subject-box ul li:hover {
+            background-color: #d0e9e7;
+        }
+
+        /* No Topics Message */
+        .no-topics {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            margin: 40px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .date-box h2 {
+                font-size: 1.3rem;
+            }
+            .subject-box h3 {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            .date-box h2 {
+                font-size: 1.2rem;
+            }
+            .subject-box h3 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Today's Revision Topics</h1>
+    <div class="container">
+        {% if grouped_topics %}
+            <div class="row">
+                {% for entry_date, subjects in grouped_topics.items %}
+                    <div class="date-box">
+                        <h2>Topics Entered on {{ entry_date }}</h2>
+                        {% for subject, topics_info in subjects.items %}
+                            <div class="subject-box">
+                                <h3>{{ subject }}</h3>
+                                <ul>
+                                    {% for topic_info in topics_info %}
+                                        <li>
+                                            {{ topic_info.topic.topic_name }} - 
+                                            Revision {{ topic_info.revision_number }}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="no-topics">No topics for today!</p>
+        {% endif %}
+    </div>
+</body>
+</html>
